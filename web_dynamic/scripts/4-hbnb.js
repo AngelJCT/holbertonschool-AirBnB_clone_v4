@@ -40,14 +40,15 @@ $(document).ready(function () {
     }
   });
 
-  const fetchPlaces = function (amenityIds = []) {
+  $('button').click(function (){
+    $('section.places').empty();
+    const amenityIds = Object.keys(amenityDict);
     $.ajax({
         url: 'http://0.0.0.0:5001/api/v1/places_search/',
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({ amenities: amenityIds }),
+        data: JSON.stringify({}),
         success: function (data) {
-            $('section.places').empty();
             for (const place of data) {
                 $.ajax({
                     url: `http://0.0.0.0:5001/api/v1/places/${place.id}/amenities`,
@@ -62,11 +63,5 @@ $(document).ready(function () {
             }
         },
       });
-  }
-  $('button').click(function (){
-    const amenityIds = Object.keys(amenityDict);
-    fetchPlaces(amenityIds);
   });
-
-    fetchPlaces();
 });
