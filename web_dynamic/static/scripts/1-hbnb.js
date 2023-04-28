@@ -1,6 +1,5 @@
 #!/usr/bin/node
 $(document).ready(function () {
-    console.log("running")
     var amenityDict = {};
     $('input[type="checkbox"]').on('change', function () {
         if ($(this).is(':checked')) {
